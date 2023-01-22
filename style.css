@@ -1,0 +1,107 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #09090A;
+  color: white;
+  block-size: 100vh;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+  position: fixed;
+  inline-size: 100vw;
+  background-color: hsl(240, 5%, 4%);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  background-color: transparent;
+  color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(258, 90%, 66%);
+  line-height: 1.25;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 35.6em) {
+  button .text-content {
+    display: none;
+  }
+}
+
+form {
+  display: flex;
+  padding: 11.375rem 3rem 3rem;
+  inline-size: fit-content;
+}
+
+.habits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-block-start: 3rem;
+}
+
+.habit {
+  inline-size: 64px;
+  block-size: 64px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.days {
+  display: flex;
+  gap: 3rem;
+  margin-inline-start: 2rem;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.date {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: hsl(240, 5%, 65%);
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  inline-size: 64px;
+  block-size: 64px;
+  border: 2px solid hsl(240, 4%, 16%);
+  border-radius: .5rem;
+  background-color: hsl(240, 6%, 10%);
+}
+
+input[type="checkbox"]:checked {
+  background-color: hsl(258, 90%, 66%);
+  border: 2px solid hsl(255, 92%, 76%);
+}
