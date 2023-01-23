@@ -82,7 +82,7 @@ form {
   gap: 1.5rem;
 }
 
-.date {
+.day div {
   font-family: 'Roboto Mono', monospace;
   font-size: 1.25rem;
   line-height: 1.25;
