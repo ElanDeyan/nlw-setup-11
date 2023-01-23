@@ -3,7 +3,7 @@ const addDayButton = document.querySelector(".add-day")
 const nlwSetup = new NLWSetup(form)
 
 const manageHabitsButton = document.querySelector(".manage-habits")
-const manageHabits = document.querySelector("addNewHabit")
+const manageHabits = document.querySelector("#addNewHabit")
 const manageHabitsForm = document.querySelector("#manage-habits")
 const cancelHabitsButton = document.querySelector(
   "#manage-habits button[type='reset']"
