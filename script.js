@@ -1,8 +1,21 @@
-const form = document.querySelector("form")
-const addButton = document.querySelector(".add-habit")
+const form = document.querySelector("#form-habits")
+const addDayButton = document.querySelector(".add-day")
 const nlwSetup = new NLWSetup(form)
 
-addButton.addEventListener("click", () => {
+const manageHabitsButton = document.querySelector(".manage-habits")
+const manageHabitsForm = document.querySelector("#manage-habits")
+const cancelHabitsButton = document.querySelector(
+  "#manage-habits button[type='reset']"
+)
+const addHabitButton = document.querySelector(
+  "#manage-habits button[type='submit']"
+)
+
+manageHabitsButton.addEventListener("click", () => manageHabitsForm.showModal())
+
+cancelHabitsButton.addEventListener("click", () => manageHabitsForm.close())
+
+addDayButton.addEventListener("click", () => {
   const today = new Date().toLocaleDateString("pt-br").slice(0, -5)
   const dayExists = nlwSetup.dayExists(today)
   if (dayExists) {

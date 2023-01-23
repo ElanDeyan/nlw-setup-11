@@ -8,19 +8,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Roboto+Mono:wght@700&display=swap"
-    rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Roboto+Mono:wght@700&display=swap"
+      rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/gh/maykbrito/libs/NLWSetup/source/NLWSetup.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/maykbrito/libs/NLWSetup/source/NLWSetup.js"
+      defer
+    ></script>
     <script src="./script.js" defer></script>
     <title>Habits</title>
   </head>
   <body>
     <header>
       <img src="./assets/logo.svg" alt="Logomarca do aplicativo Habits" />
-      <button type="button" class="add-habit">
-        <img class="plus" src="./assets/plus.svg" alt="Ícone de adicionar" />
-        <span class="text-content">Registrar meu dia</span>
+      <button type="button" class="add-day">
+        <img
+          class="plus"
+          src="./assets/plus.svg"
+          alt="Ícone de adicionar novo dia"
+        />
+        <span class="text-content">Registrar novo dia</span>
+      </button>
+      <button type="button" class="manage-habits">
+        <img
+          class="plus"
+          src="./assets/plus.svg"
+          alt="Ícone de adicionar hábito"
+        />
+        <span class="text-content">Gerencie seus hábitos</span>
       </button>
     </header>
     <main>
@@ -35,6 +50,23 @@
         </div>
         <div class="days"></div>
       </form>
+      <dialog id="addNewHabit">
+        <form id="manage-habits" method="dialog">
+          <fieldset>
+            <legend>Gerencie seus hábitos!</legend>
+            <label for="habit-name">Nome:</label>
+            <input type="text" name="habit-name" id="habit-name" />
+
+            <label for="habit-icon">Ícone:</label>
+            <input type="text" name="habit-icon" id="habit-icon" />
+
+            <menu>
+              <button type="reset">Cancelar</button>
+              <button type="submit">Registrar</button>
+            </menu>
+          </fieldset>
+        </form>
+      </dialog>
     </main>
   </body>
 </html>
