@@ -63,7 +63,7 @@ window.onload = () => {
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation?.type === "childList") {
-        nlwSetup = new NLWSetup()
+        nlwSetup = new NLWSetup(elements?.forms?.habitsGrid)
         console.log("Novo filho criado")
         console.log(nlwSetup.data)
       }
@@ -91,3 +91,25 @@ function addHabit(habitData) {
   newHabit.innerText = `${habitData.habitIcon}`
   return newHabit
 }
+
+elements?.buttons?.addDay.addEventListener("click", () => {
+  if (nlwSetup === undefined) return
+  const today = new Date().toLocaleDateString("pt-br").slice(0, -5)
+  const dayExists = nlwSetup.dayExists(today)
+  if (dayExists) {
+    alert("Dia já incluso")
+    return
+  }
+  alert("Dia Adicionado com sucesso")
+  nlwSetup.addDay(today)
+})
+
+elements?.forms?.habitsGrid.addEventListener("change", () => {
+  console.log(nlwSetup.data)
+  localStorage.setItem("NLWSetup@habits", JSON.stringify(nlwSetup.data))
+})
+
+const data = JSON.parse(localStorage.getItem("NLWSetup@habits")) ?? {}
+
+nlwSetup.setData(data)
+nlwSetup.load()
