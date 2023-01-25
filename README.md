@@ -30,3 +30,7 @@ Esse projeto está sob a licença MIT.
 ---
 
 Feito com ♥ by Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
+
+## Créditos
+
+[https://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays](ObJect Map function) - Função para fazer um 'map' em objetos

@@ -15,7 +15,8 @@
       src="https://cdn.jsdelivr.net/gh/maykbrito/libs/NLWSetup/source/NLWSetup.js"
       defer
     ></script>
-    <script src="./script.js" defer></script>
+    <script type="module" src="./js/objectMap.js"></script>
+    <script src="./newScript.js" type="module" defer></script>
     <title>Habits</title>
   </head>
   <body>
@@ -39,30 +40,25 @@
       </button>
     </header>
     <main>
-      <form id="form-habits">
-        <div class="habits">
-          <div class="habit" data-name="run">🏃‍♂️</div>
-          <div class="habit" data-name="water">💧</div>
-          <div class="habit" data-name="food">🍎</div>
-          <div class="habit" data-name="journal">📒</div>
-          <div class="habit" data-name="takePills">💊</div>
-          <div class="habit" data-name="sleep">😴</div>
-        </div>
+      <form method="post" id="form-habits">
+        <div class="habits"></div>
         <div class="days"></div>
       </form>
       <dialog id="addNewHabit">
-        <form id="manage-habits" method="dialog">
+        <form id="manage-habits">
           <fieldset>
-            <legend>Gerencie seus hábitos!</legend>
-            <label for="habit-name">Nome:</label>
-            <input type="text" name="habit-name" id="habit-name" />
-
-            <label for="habit-icon">Ícone:</label>
-            <input type="text" name="habit-icon" id="habit-icon" />
-
+            <legend>Registre um novo hábito!</legend>
+            <div class="input-block">
+              <label for="habit-name">Nome:</label>
+              <input type="text" name="habit-name" id="habit-name" />
+            </div>
+            <div class="input-block">
+              <label for="habit-icon">Ícone:</label>
+              <input type="text" name="habit-icon" id="habit-icon" />
+            </div>
             <menu>
-              <button type="reset">Cancelar</button>
-              <button type="submit">Registrar</button>
+              <button class="close" type="button">Cancelar</button>
+              <button class="register" type="submit">Registrar</button>
             </menu>
           </fieldset>
         </form>

@@ -105,3 +105,27 @@ input[type="checkbox"]:checked {
   background-color: hsl(258, 90%, 66%);
   border: 2px solid hsl(255, 92%, 76%);
 }
+
+:modal {
+  margin: auto;
+  background-color: hsl(240, 5%, 4%);
+  color: hsl(0, 0%, 100%);
+  block-size: fit-content;
+}
+
+::backdrop {
+  background-color: hsla(240, 5%, 4%, 50%);
+}
+
+#manage-habits {
+  padding: 1em;
+}
+
+#manage-habits fieldset :not(legend) {
+  margin-block-end: 1rem;
+}
+
+#manage-habits input {
+  background-color: transparent;
+  color: hsl(0, 0%, 100%);
+}
