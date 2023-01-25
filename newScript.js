@@ -11,16 +11,14 @@ const selectors = {
   buttons: {
     addDay: ".add-day",
     manageHabits: ".manage-habits",
+    cancel: "#manage-habits button.close",
+    register: "#manage-habits button.register",
   },
   containers: {
     habits: ".habits",
   },
   modals: {
     manageHabits: "#addNewHabit",
-    buttons: {
-      cancel: "#manage-habits button.close",
-      register: "#manage-habits button.register",
-    },
   },
 }
 
@@ -42,14 +40,34 @@ for (const [key, value] of Object.entries(selectors)) {
 
 let nlwSetup
 
-if (elements.containers.habits.hasChildNodes()) {
-  nlwSetup = new NLWSetup()
-}
+// if (elements.containers.habits.hasChildNodes()) {
+//   nlwSetup = new NLWSetup()
+// }
 
 elements.buttons.manageHabits.addEventListener("click", () =>
-  elements.modals.manageHabits.showModal(),
+  elements.modals.manageHabits.showModal()
 )
 
 elements.modals.buttons.cancel.addEventListener("click", () =>
-  elements.modals.manageHabits.close(),
+  elements.modals.manageHabits.close()
 )
+
+window.onload = () => {
+  let config = {
+    attibutes: true,
+    childList: true,
+    subtree: true,
+  }
+
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === "childList") {
+        nlwSetup = new NLWSetup()
+        console.log("Novo filho criado")
+        console.log(nlwSetup.data)
+      }
+    }
+  })
+
+  observer.observe(elements.containers.habits, config)
+}

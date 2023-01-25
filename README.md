@@ -34,3 +34,5 @@ Feito com ♥ by Rocketseat :wave: [Participe da nossa comunidade!](https://disc
 ## Créditos
 
 [https://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays](ObJect Map function) - Função para fazer um 'map' em objetos
+
+[https://stackoverflow.com/questions/51476691/trigger-event-when-new-children-appear-in-html-element](Observing changes on DOM with Observer)
