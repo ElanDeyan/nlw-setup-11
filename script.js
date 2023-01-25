@@ -72,6 +72,8 @@ window.onload = () => {
   observer.observe(elements.containers.habits, config)
 }
 
+const manageHabitsData = new Object()
+
 elements?.buttons?.register.addEventListener("click", (e) => {
   e.preventDefault()
   const data = new FormData(elements?.forms?.manageHabits)
