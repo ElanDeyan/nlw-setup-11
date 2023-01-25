@@ -79,7 +79,7 @@ elements?.buttons?.register.addEventListener("click", (e) => {
   const data = new FormData(elements?.forms?.manageHabits)
   manageHabitsData["habitName"] = data.get("habit-name")
   manageHabitsData["habitIcon"] = data.get("habit-icon")
-  habitsContainer.appendChild(addHabit(manageHabitsData))
+  elements?.containers?.habits.appendChild(addHabit(manageHabitsData))
   elements?.forms?.manageHabits.reset()
   elements?.modals?.manageHabits.close()
 })
