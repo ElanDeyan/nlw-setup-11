@@ -1,57 +1,85 @@
 "use strict"
 
-const form = document.querySelector("#form-habits")
-const addDayButton = document.querySelector(".add-day")
-const habitsContainer = document.querySelector(".habits")
-if (habitsContainer.hasChildNodes()) {
-  let nlwSetup = new NLWSetup()
-}
-const manageHabitsSelectors = {
-  button: {
-    selector: ".manage-habits",
-  },
-  modal: {
-    selector: "#addNewHabit",
-  },
-  form: {
-    selector: "#manage-habits",
-  },
-  cancelButton: {
-    selector: "#manage-habits button.close",
-  },
-  createButton: {
-    selector: "#manage-habits button.register",
-  },
-}
+import { objectMap } from "./js/objectMap.js"
 
-const manageHabitsElements = new Object()
+const getElement = (selector) => document.querySelector(`${selector}`)
 
-for (const elem in manageHabitsSelectors) {
-  manageHabitsElements[`${elem}`] = document.querySelector(
-    manageHabitsSelectors[elem]["selector"],
-  )
+const selectors = {
+  forms: {
+    habitsGrid: "#form-habits",
+    manageHabits: "#manage-habits",
+  },
+  buttons: {
+    addDay: ".add-day",
+    manageHabits: ".manage-habits",
+    cancel: "#manage-habits button.close",
+    register: "#manage-habits button.register",
+  },
+  containers: {
+    habits: ".habits",
+  },
+  modals: {
+    manageHabits: "#addNewHabit",
+  },
 }
 
-manageHabitsElements["button"].addEventListener("click", () =>
-  manageHabitsElements["modal"].showModal(),
+const elements = new Object()
+
+for (const [key, value] of Object.entries(selectors)) {
+  elements[key] = objectMap(value, (item) => {
+    if (typeof item === "object") {
+      for (const keyOfItem in item) {
+        if (Object.hasOwnProperty.call(item, keyOfItem)) {
+          console.log(keyOfItem)
+        }
+      }
+    } else {
+      return getElement(`${item}`)
+    }
+  })
+}
+
+let nlwSetup
+
+// if (elements.containers.habits.hasChildNodes()) {
+//   nlwSetup = new NLWSetup()
+// }
+
+elements?.buttons?.manageHabits.addEventListener("click", () =>
+  elements?.modals?.manageHabits.showModal()
 )
 
-manageHabitsElements["cancelButton"].addEventListener("click", () =>
-  manageHabitsElements["modal"].close(),
+elements?.buttons?.cancel.addEventListener("click", () =>
+  elements.modals.manageHabits.close()
 )
 
-const manageHabitsData = new Object()
+window.onload = () => {
+  let config = {
+    attibutes: true,
+    childList: true,
+    subtree: true,
+  }
 
-manageHabitsElements["createButton"].addEventListener("click", (e) => {
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation?.type === "childList") {
+        nlwSetup = new NLWSetup()
+        console.log("Novo filho criado")
+        console.log(nlwSetup.data)
+      }
+    }
+  })
+  observer.observe(elements.containers.habits, config)
+}
+
+elements?.buttons?.register.addEventListener("click", (e) => {
   e.preventDefault()
-  const data = new FormData(manageHabitsElements["form"])
+  const data = new FormData(elements?.forms?.manageHabits)
   manageHabitsData["habitName"] = data.get("habit-name")
   manageHabitsData["habitIcon"] = data.get("habit-icon")
   habitsContainer.appendChild(addHabit(manageHabitsData))
-  nlwSetup = new NLWSetup()
-  console.log(nlwSetup.data)
-  manageHabitsElements["form"].reset()
-  manageHabitsElements["modal"].close()
+  elements?.forms?.manageHabits.reset()
+  elements?.modals?.manageHabits.close()
 })
 
 function addHabit(habitData) {
@@ -60,37 +88,4 @@ function addHabit(habitData) {
   newHabit.setAttribute("data-name", `${habitData.habitName}`)
   newHabit.innerText = `${habitData.habitIcon}`
   return newHabit
-}
-
-addDayButton.addEventListener("click", () => {
-  if (nlwSetup === undefined) return
-  const today = new Date().toLocaleDateString("pt-br").slice(0, -5)
-  const dayExists = nlwSetup.dayExists(today)
-  if (dayExists) {
-    alert("Dia já incluso")
-    return
-  }
-  alert("Dia Adicionado com sucesso")
-  nlwSetup.addDay(today)
-})
-
-form.addEventListener("change", () => {
-  if (nlwSetup === undefined) return
-  console.log(nlwSetup.data)
-  localStorage.setItem("NLWSetup@habits", JSON.stringify(nlwSetup.data))
-})
-
-function habitsLoad() {
-  if (nlwSetup === undefined) return
-  const data = JSON.parse(localStorage.getItem("NLWSetup@habits")) ?? {}
-
-  nlwSetup.setData(data)
-  nlwSetup.load()
-}
-
-if (localStorage.getItem("NLWSetup@habits") !== null) {
-  habitsLoad()
-} else {
-  localStorage.setItem("NLWSetup@habits", nlwSetup.data)
-  habitsLoad()
 }
