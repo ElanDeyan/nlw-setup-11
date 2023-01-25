@@ -7,6 +7,7 @@ const getElement = (selector) => document.querySelector(`${selector}`)
 const selectors = {
   forms: {
     habitsGrid: "#form-habits",
+    manageHabits: "#manage-habits",
   },
   buttons: {
     addDay: ".add-day",
@@ -44,11 +45,11 @@ let nlwSetup
 //   nlwSetup = new NLWSetup()
 // }
 
-elements.buttons.manageHabits.addEventListener("click", () =>
-  elements.modals.manageHabits.showModal()
+elements?.buttons?.manageHabits.addEventListener("click", () =>
+  elements?.modals?.manageHabits.showModal()
 )
 
-elements.modals.buttons.cancel.addEventListener("click", () =>
+elements?.buttons?.cancel.addEventListener("click", () =>
   elements.modals.manageHabits.close()
 )
 
@@ -61,13 +62,30 @@ window.onload = () => {
 
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
-      if (mutation.type === "childList") {
+      if (mutation?.type === "childList") {
         nlwSetup = new NLWSetup()
         console.log("Novo filho criado")
         console.log(nlwSetup.data)
       }
     }
   })
-
   observer.observe(elements.containers.habits, config)
+}
+
+elements?.buttons?.register.addEventListener("click", (e) => {
+  e.preventDefault()
+  const data = new FormData(elements?.forms?.manageHabits)
+  manageHabitsData["habitName"] = data.get("habit-name")
+  manageHabitsData["habitIcon"] = data.get("habit-icon")
+  habitsContainer.appendChild(addHabit(manageHabitsData))
+  elements?.forms?.manageHabits.reset()
+  elements?.modals?.manageHabits.close()
+})
+
+function addHabit(habitData) {
+  const newHabit = document.createElement("div")
+  newHabit.classList.add("habit")
+  newHabit.setAttribute("data-name", `${habitData.habitName}`)
+  newHabit.innerText = `${habitData.habitIcon}`
+  return newHabit
 }
