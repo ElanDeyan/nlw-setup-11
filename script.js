@@ -107,9 +107,7 @@ elements?.buttons?.addDay.addEventListener("click", () => {
 elements?.forms?.habitsGrid.addEventListener("change", () => {
   console.log(nlwSetup.data)
   localStorage.setItem("NLWSetup@habits", JSON.stringify(nlwSetup.data))
+  const data = JSON.parse(localStorage.getItem("NLWSetup@habits")) ?? {}
+  nlwSetup.setData(data)
+  nlwSetup.load()
 })
-
-const data = JSON.parse(localStorage.getItem("NLWSetup@habits")) ?? {}
-
-nlwSetup.setData(data)
-nlwSetup.load()
