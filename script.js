@@ -72,12 +72,19 @@ window.onload = () => {
   observer.observe(elements.containers.habits, config)
 }
 
+function camelize(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+    return index === 0 ? match.toLowerCase() : match.toUpperCase();
+  });
+}
+
 const manageHabitsData = new Object()
 
 elements?.buttons?.register.addEventListener("click", (e) => {
   e.preventDefault()
   const data = new FormData(elements?.forms?.manageHabits)
-  manageHabitsData["habitName"] = data.get("habit-name")
+  manageHabitsData["habitName"] = camelize(data.get("habit-name"))
   manageHabitsData["habitIcon"] = data.get("habit-icon")
   elements?.containers?.habits.appendChild(addHabit(manageHabitsData))
   elements?.forms?.manageHabits.reset()
