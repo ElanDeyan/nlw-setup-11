@@ -109,6 +109,7 @@ elements?.buttons?.addDay.addEventListener("click", () => {
   }
   alert("Dia Adicionado com sucesso")
   nlwSetup.addDay(today)
+  nlwSetup.load()
 })
 
 elements?.forms?.habitsGrid.addEventListener("change", () => {
