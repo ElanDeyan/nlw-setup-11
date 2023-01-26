@@ -112,4 +112,4 @@ elements?.forms?.habitsGrid.addEventListener("change", () => {
   console.log(nlwSetup.data)
 })
 
-nlwSetup.load()
+if(nlwSetup !== undefined) nlwSetup.load()
